@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  regional:
+    build:
+      context: ../.
+      dockerfile: ./central/dockerfile.central
+    ports:
+      - "8081:8080"

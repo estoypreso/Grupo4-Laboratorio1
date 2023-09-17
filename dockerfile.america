@@ -1,0 +1,26 @@
+# Usamos una imagen base de Golang 1.21.1
+FROM golang:1.21.1
+
+# Establecemos el directorio de trabajo en /app
+WORKDIR /app
+
+# Copiamos los archivos go.mod y go.sum a la imagen
+COPY go.mod .
+COPY go.sum .
+
+# Descargamos e instalamos las dependencias del proyecto
+RUN go mod download
+
+# Copiamos el código fuente y los archivos protobuf
+COPY ../proto /app/proto
+COPY ../america /app/america
+
+# Compilamos el código de Go
+RUN go build -o america
+
+
+# Exponemos el puerto en el que se ejecutará el servidor
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación
+CMD ["./america"]

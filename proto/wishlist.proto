@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "/proto";
+
+
+message MsgReq{
+  int64 Llaves = 1;
+  int64 Nronda = 2;
+  int64 total_rondas = 3;
+}
+
+message MsgResp{
+  Region region =1;
+}
+
+message Region{
+  string region= 1;
+}
+
+message RespReq{
+  int64 usuariosrestantes =1;
+  int64 llavesentregadas=2;
+}
+
+message RespResp{
+  Faltan usuarios=1;
+}
+
+message Faltan{
+  int64 usuariosrest = 1;
+}
+
+service MessageService {
+  rpc aviso (MsgReq) returns (MsgResp);
+  rpc respuesta(RespReq) returns (RespResp);
+}
+
+
